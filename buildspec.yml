@@ -18,6 +18,3 @@ phases:
       - echo "Updating lambda Function..."
       - aws lambda update-function-code --function-name create-product-function --zip-file fileb://deployment_package.zip
       - echo "DONE!!"
-aws lambda update-function-code \
-    --function-name  my-function \
-    --zip-file fileb://my-function.zip      -
