@@ -51,17 +51,17 @@ Resources:
         Location: 'https://github.com/aaple-laghu-udyog/alu-create-product-api.git'
         BuildSpec: buildspec.yml
         Auth:
-          Type: OAuth
+          Type: OAUTH
           Resource: !Ref CodeBuildSourceCredentials
       Artifacts:
         Type: NO_ARTIFACTS
       Triggers:
         Webhook: true
         FilterGroups:
-          - Type: EVENT
-            Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED'
-          - Type: BASE_REF
-            Pattern: !Sub ^refs/heads/master$
+            - - Type: EVENT
+                Pattern: PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED
+              - Type: BASE_REF
+                Pattern: !Sub ^refs/heads/main$
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
