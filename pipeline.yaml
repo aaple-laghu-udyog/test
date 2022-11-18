@@ -48,7 +48,7 @@ Resources:
         - Arn
       Source:
         Type: GITHUB
-        Location: 'https://github.com/aaple-laghu-udyog/alu-create-product-lambda.git'
+        Location: 'https://github.com/aaple-laghu-udyog/alu-create-product-api.git'
         BuildSpec: buildspec.yml
         Auth:
           Type: OAuth
