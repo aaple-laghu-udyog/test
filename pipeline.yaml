@@ -1,5 +1,61 @@
 AWSTemplateFormatVersion: 2010-09-09
 Resources:
+
+  CreateProductLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: create-product-function
+      Runtime: python3.9
+      Timeout: 5
+      Handler: CreateProduct.lambda_handler
+      Role: !GetAtt LambdaFunctionRole.Arn
+      Code:
+        ZipFile:
+          !Sub
+            - |-
+              #!/usr/bin/env python3
+              import logging
+              import json
+
+              LOGGER = logging.getLogger()
+              LOGGER.setLevel(logging.INFO)
+
+              def lambda_handler(event, context):
+                try:
+                  LOGGER.info('Event structure: %s', event)
+                  return {
+                      'statusCode': 200,
+                      'body': json.dumps('Hello from Lambda!')
+                  }
+                except Exception as e:
+                  LOGGER.error(e)
+
+            - lambda_function_role_arn: !Ref LambdaFunctionRole
+  LambdaFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+              - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: LambdaFunctionPolicy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: '*'
+
   CodeBuildServiceRole:
     Type: 'AWS::IAM::Role'
     Properties:
