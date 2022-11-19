@@ -17,5 +17,5 @@ phases:
     commands:
       - echo "Updating lambda Function..."
 #      - aws lambda update-function-code --function-name create-product-function --zip-file fileb://deployment_package.zip
-      - aws s3 cp src s3://alu-lambda-functions/ --recursive
+      - aws s3 cp src s3://alu-lambda-functions/src --recursive
       - echo "DONE!!"
