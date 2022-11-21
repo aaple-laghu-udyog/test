@@ -19,5 +19,5 @@ phases:
       - aws s3 cp src s3://alu-lambda-functions/src --recursive
 #      - zip -r ./deployment_package.zip ./src
 #      - aws s3 cp deployment_package.zip s3://alu-lambda-functions/src
-      - aws lambda update-function-code --function-name create-product-function --s3-bucket alu-lambda-functions --s3-key src/
+      - aws lambda update-function-code --function-name create-product-function --s3-bucket s3://alu-lambda-functions/src/ --s3-key src/
       - echo "DONE!!"
